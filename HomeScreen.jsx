@@ -1,7 +1,7 @@
 export const FAMILY = {
   name: 'קליינר',
   members: [
-    { id: 'mark', name: 'מרק', role: 'אבא', emoji: '👨' },
+    { id: 'mark', name: 'מארק', role: 'אבא', emoji: '👨' },
     { id: 'chen', name: 'חן',  role: 'אמא', emoji: '👩' },
   ],
 };
