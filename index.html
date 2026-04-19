@@ -1,55 +1,12 @@
-import React, { useState } from 'react';
-
-const FILTERS = [
-  { id: 'all',  label: 'הכל' },
-  { id: 'mark', label: 'מרק' },
-  { id: 'chen', label: 'חן' },
-  { id: 'both', label: 'שניהם' },
-];
-
-export default function TasksScreen({ tasks, onToggle }) {
-  const [filter, setFilter] = useState('all');
-
-  const filtered = filter === 'all' ? tasks : tasks.filter(t => t.filter === filter);
-  const done     = filtered.filter(t => t.done).length;
-  const pct      = filtered.length ? Math.round(done / filtered.length * 100) : 0;
-
-  return (
-    <div className="screen" style={{ background: 'rgba(12,6,30,0.97)', backdropFilter: 'blur(28px)', WebkitBackdropFilter: 'blur(28px)' }}>
-      <div className="ss-topbar">
-        <div className="ss-title">✅ משימות</div>
-        <div className="chips-row">
-          {FILTERS.map(f => (
-            <button key={f.id} className={`chip${filter === f.id ? ' on' : ''}`} onClick={() => setFilter(f.id)}>{f.label}</button>
-          ))}
-        </div>
-      </div>
-
-      <div className="s-body" style={{ paddingTop: 0 }}>
-        {/* Progress */}
-        <div className="glass" style={{ margin: '14px 20px 0', padding: '14px 16px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 9, fontSize: 13, color: 'rgba(255,255,255,0.65)' }}>
-            <span>הושלמו היום</span>
-            <span style={{ fontWeight: 700, color: '#fff' }}>{done} / {filtered.length}</span>
-          </div>
-          <div style={{ height: 6, background: 'rgba(255,255,255,0.1)', borderRadius: 3, overflow: 'hidden' }}>
-            <div style={{ height: '100%', width: pct + '%', background: 'linear-gradient(90deg,var(--pur),#C084FC)', borderRadius: 3, transition: 'width 0.5s ease' }} />
-          </div>
-        </div>
-
-        {/* Tasks */}
-        <div className="glass" style={{ margin: '14px 20px 0', overflow: 'hidden' }}>
-          {filtered.map((t, i) => (
-            <div key={t.id} style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '12px 15px', borderBottom: i < filtered.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none' }}>
-              <div className={`chk${t.done ? ' on' : ''}`} onClick={() => onToggle(t.id)}>{t.done ? '✓' : ''}</div>
-              <span style={{ flex: 1, fontSize: 14, color: t.done ? 'var(--muted)' : 'rgba(255,255,255,0.82)', fontWeight: 500, textDecoration: t.done ? 'line-through' : 'none' }}>{t.text}</span>
-              <span style={{ fontSize: 10, padding: '3px 8px', borderRadius: 8, background: 'rgba(255,255,255,0.09)', color: 'var(--muted)', fontWeight: 600 }}>{t.assignee}</span>
-            </div>
-          ))}
-        </div>
-
-        <button className="add-btn">＋ הוסף משימה</button>
-      </div>
-    </div>
-  );
-}
+<!doctype html>
+<html lang="he">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kleiner App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/main.jsx"></script>
+  </body>
+</html>
