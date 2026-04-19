@@ -1,0 +1,47 @@
+import React, { useState } from 'react';
+
+const QUICK = ['בוקר טוב אהוב ☀️', 'מחשבת עליך ❤️', 'תודה שאתה אתי 🙏', 'אוהבת אותך 💕', 'שיהיה לך יום נפלא ✨'];
+
+export default function ComposeOverlay({ onClose, onSend }) {
+  const [to, setTo]     = useState('chen');
+  const [text, setText] = useState('');
+  const [err, setErr]   = useState(false);
+
+  function handleSend() {
+    if (!text.trim()) { setErr(true); return; }
+    onSend(text.trim(), to);
+    onClose();
+  }
+
+  return (
+    <div className="compose-backdrop" onClick={e => e.target === e.currentTarget && onClose()}>
+      <div className="compose-sheet">
+        <div className="c-handle" />
+        <div className="c-title">✍️ כתוב פתק</div>
+
+        <div className="c-lbl">לשלוח אל:</div>
+        <div className="c-to-row">
+          <button className={`c-to-btn${to === 'mark' ? ' on' : ''}`} onClick={() => setTo('mark')}>💙 מרק</button>
+          <button className={`c-to-btn${to === 'chen' ? ' on' : ''}`} onClick={() => setTo('chen')}>🌸 חן</button>
+        </div>
+
+        <div className="c-lbl">השראה מהירה:</div>
+        <div className="quick-row">
+          {QUICK.map(q => (
+            <button key={q} className="qchip" onClick={() => { setText(q); setErr(false); }}>{q}</button>
+          ))}
+        </div>
+
+        <textarea
+          className="c-ta"
+          placeholder="כתוב פתק קצר ומלא אהבה..."
+          value={text}
+          onChange={e => { setText(e.target.value); setErr(false); }}
+          style={{ borderColor: err ? 'rgba(220,80,80,0.6)' : undefined }}
+        />
+
+        <button className="c-send" onClick={handleSend}>שלח 💌</button>
+      </div>
+    </div>
+  );
+}
